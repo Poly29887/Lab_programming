@@ -15,9 +15,9 @@ int main()
 {
 	char ch = ' ';
 	char direct='S';
-	int shot = 0;
-	int x = 38, y = 20,x_s,y_s;
-	
+	int shot[5] = { 0,0,0,0,0 };
+	int x = 38, y = 20,x_s[5],y_s[5];
+	int i;
 
 	setcursor(0);
 	draw_ship(x, y);
@@ -25,12 +25,19 @@ int main()
 		if (_kbhit())
 		{
 			ch = _getch();
-			if (ch == 32&&shot==0)
+			if (ch == 32)
 		    {
-			  shot = 1;
-			  x_s = x + 3;
-			  y_s = y - 1;
-			  draw_bullet(x_s, y_s);
+		      for (i = 0; i < 5; i++)
+			  {
+				if (shot[i] == 0)
+				{
+				 shot[i] = 1;
+			     x_s[i] = x + 3;
+			     y_s[i] = y - 1;
+			     draw_bullet(x_s[i], y_s[i]);
+				 break;
+				}
+			  }
 		    }
 			if (ch == 'a') //L=Left
 			{
@@ -47,19 +54,21 @@ int main()
 		}
 		fflush(stdin);
 
-		if (shot == 1)
+		for (i = 0; i < 5; i++)
 		{
-			erase_bullet(x_s, y_s);
-			if (y_s  != 0)
+		  if (shot[i] == 1)
+		  {
+			erase_bullet(x_s[i], y_s[i]);
+			if (y_s[i] != 0)
 			{
-				draw_bullet(x_s, --y_s);
+				draw_bullet(x_s[i], --y_s[i]);
 			}
 			else
 			{
-				shot = 0;
+				shot[i] = 0;
 			}
+		  }
 		}
-		
 		if (direct == 'L' && x != 0)
 		{
 			erase_ship(x, y);
