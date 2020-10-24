@@ -89,7 +89,7 @@ int main()
 						check_score(1);
 						Beep(700, 100);
 						clear_star(x_bullet[i], y_bullet[i] - 1);
-						re_star();
+						draw_star();
 						
 					}
 					else 
@@ -145,22 +145,6 @@ void erase_ship(int x, int y)
 void draw_star()
 {
 	setcolor(6,0);
-	int i;
-	for (i = 0; i < 20; i++)
-	{
-		if (x_star[i] == 0 && y_star[i] == 0)
-		{
-			x_star[i] = random_num(10, 70);
-			y_star[i] = random_num(2, 5);
-			gotoxy(x_star[i], y_star[i]);
-			printf("*");
-		}
-		check_star(i);
-	}
-}
-void re_star()
-{
-	setcolor(4, 0);
 	int i;
 	for (i = 0; i < 20; i++)
 	{
